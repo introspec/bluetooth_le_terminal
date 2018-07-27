@@ -70,10 +70,12 @@ write_cb(GIOChannel *source, GIOCondition cond, gpointer user_data)
         return false; 
     } else {
         GAttrib *attrib = user_data;
+        write_cmd(attrib, 0x25, buf, rlen, NULL, NULL);
+#if XXX_NOTYET
         int offset = 0;
         int i;
         for (i = 0; i < rlen; ++i) {
-            if (0 && buf[i] == LINEFEED) {
+            if (buf[i] == LINEFEED) {
                 gchar save = buf[i + 1];
                 buf[i] = CARRIAGE_RETURN;
                 buf[i + 1] = LINEFEED;
@@ -93,6 +95,7 @@ write_cb(GIOChannel *source, GIOCondition cond, gpointer user_data)
                     attrib, 0x25,
                     buf + offset, i - offset,
                     NULL, NULL);
+#endif
     }
     return true;
 }
