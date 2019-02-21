@@ -66,8 +66,9 @@ write_cb(GIOChannel *source, GIOCondition cond, gpointer user_data)
     }
 
     if (rlen == 0) {
-        g_main_loop_quit(event_loop);
+        /*g_main_loop_quit(event_loop);*/
         return false; 
+        /*return true;*/
     } else {
         GAttrib *attrib = user_data;
         write_cmd(attrib, 0x25, buf, rlen, NULL, NULL);
